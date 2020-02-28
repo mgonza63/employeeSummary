@@ -9,16 +9,14 @@
 </head>
 <body>
     <div class="card" style="width: 18rem;">
-        <div class="card-body">
-          <h5 class="card-title">Mauricio</h5>
-          <h5 class="card-subtitle mb-2 text-muted">Manager</h5>
-          <ul class="list-group list-group-flush">
-            <li class="list-group-item" id="id"> </li>
-            <li class="list-group-item" id="email"> </li>
-            <li class="list-group-item" id="office"> </li>
-        </ul>
-
-        </div>
-      </div>
+      <h2 class="card-title">{{ name }}</h2>
+      <h3 class="card-title"><i class="fas fa-mug-hot mr-2"></i>{{ role }}</h3>
+  </div>
+  <div class="card-body">
+      <ul class="list-group">
+          <li class="list-group-item">ID: {{ id }}</li>
+          <li class="list-group-item">Email: <a href="mailto:{{ email }}">{{ email }}</a></li>
+          <li class="list-group-item">Office number: {{ officeNumber }}</li>
+      </ul>
 </body>
 </html>

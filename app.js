@@ -2,6 +2,8 @@ const Manager = require("./lib/manager");
 const Engineer = require("./lib/engineer");
 const Intern = require("./lib/intern");
 
+const teamRenderer = require("./lib/htmlRenderer");
+
 const fs = require("fs");
 const inquirer = require("inquirer");
 
@@ -12,98 +14,157 @@ const inquirer = require("inquirer");
 //     message: ""
 // },
 
+let teamMembers = [];
 
-const managerQuestions = [
-    {
-        type: "input",
-        name: "name",
-        message: "Enter manager name:",
+function createTeam() {
 
-    },
-    {
-        type: "input",
-        name: "email",
-        message: "Enter manager's email:",
+    inquirer.prompt([
+            {
+                type: "list",
+                name: "memberChoice",
+                message: "Do you want to add another employee?",
+                choices: [
+                    "Manager",
+                    "Engineer",
+                    "Intern",
+                    "Stop"
+                ]
+            }
+        ]).then(res => {
 
-    },
-    {
-        type: "input",
-        name: "officeNum",
-        message: "Enter office number:",
+            switch (res.memberChoice) {
 
-    },
-    {
-        type: "list",
-        name: "addTeam",
-        message: "Do you have any team members?",
-        choices: ["Yes", "No"]
+                case "Manager":
+                    addManager();
+                    break;
+
+                case "Engineer":
+                    addEngineer();
+                    break;
+
+                case "Intern":
+                    addIntern();
+                    break;
+
+                case "Stop":
+                    break
+
+            }
+        })
+
+
+    function addManager() {
+        inquirer
+            .prompt([
+
+                {
+                    type: "input",
+                    message: "What is your first name?",
+                    name: "managerName"
+                },
+
+                {
+                    type: "input",
+                    message: "What is your employee ID?",
+                    name: "managerID"
+                },
+
+                {
+                    type: "input",
+                    message: "What is your email?",
+                    name: "managerEmail"
+                },
+
+                {
+                    type: "input",
+                    message: "What is your office number?",
+                    name: "managerOfficeNumber"
+                }
+
+            ]).then(res => {
+                console.log(res);
+
+                const manager = new Manager(res.managerName, res.managerID, res.managerEmail, res.managerOfficeNumber)
+
+                teamMembers.push(manager)
+
+                createTeam();
+
+            })
+
+
     }
-]
 
-const employeeQuestions = [
-    {
-        type: "input",
-        name: "name",
-        message: "Enter employee name:",
-    },
-    {
-        type: "input",
-        name: "email",
-        message: "Enter their email:",
 
-    },
-    {
-        type: "list",
-        name: "role",
-        message: "What is their role?",
-        choices: ["engineer", "intern"]
-    },
-    {
-        when: input => {
-            return input.role == "engineer"
-        },
-        type: "input",
-        name: "github",
-        message: "Engineer, enter your github username:",
+    function addEngineer() {
+        inquirer.prompt([
+                {
+                    type: "input",
+                    message: "What is your engineer's first name?",
+                    name: "engineerName"
+                },
 
-    },
-    {
-        when: input => {
-            return input.role == "intern"
-        },
-        type: "input",
-        name: "school",
-        message: "Intern, enter your school name:",
-    },
-    {
-        type: "list",
-        name: "addTeam",
-        message: "Add another team member?",
-        choices: ["Yes", "No"]
+                {
+                    type: "input",
+                    message: "What is your engineer's ID?",
+                    name: "engineerID"
+                },
+
+                {
+                    type: "input",
+                    message: "What is your engineer's email?",
+                    name: "engineerEmail"
+                },
+
+                {
+                    type: "input",
+                    message: "What is your engineer's GitHub username?",
+                    name: "gitHubUsername"
+                }
+            ]).then(userChoice => {
+                console.log(res);
+
+                const engineer = new Engineer(res.engineerName, res.engineerID, res.engineerEmail, res.gitHubUsername)
+
+                teamMembers.push(engineer)
+
+                createTeam();
+
+            })
     }
-]
-function promptEmployee () {
-    inquirer.prompt(employeeQuestions).then(employeeAnswers => {
-        if (employeeAnswers.addTeam === "Yes") {
-            promptEmployee();
-        } else {
-            return
-        };
-    });
-    
 
-} 
+    function addIntern() {
+        inquirer.prompt([
+                {
+                    type: "input",
+                    message: "What is your intern's first name?",
+                    name: "internName"
+                },
+                {
+                    type: "input",
+                    message: "What is your intern's employee ID?",
+                    name: "internID"
+                },
+                {
+                    type: "input",
+                    message: "What is your intern's email?",
+                    name: "internEmail"
+                },
+                {
+                    type: "input",
+                    message: "What is your intern's school?",
+                    name: "internSchool"
+                }
+             
+        ]).then(res => {
+            console.log(res);
 
-function init() {
-    inquirer.prompt(managerQuestions).then(managerAnswers => {
-        if (managerAnswers.addTeam === "Yes") {
-            promptEmployee();
-        } else {
-            return
-        };
+            const intern = new Intern(res.internName, res.internID, res.internEmail, res.internSchool)
 
-    });
+            teamMembers.push(intern)
 
-};
-
-init()
+            createTeam();
+        })
+    }
+}
+createTeam();
