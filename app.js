@@ -2,7 +2,7 @@ const Manager = require("./lib/manager");
 const Engineer = require("./lib/engineer");
 const Intern = require("./lib/intern");
 
-const teamRenderer = require("./lib/htmlRenderer");
+const htmlRenderer = require("./lib/htmlRenderer");
 
 const fs = require("fs");
 const inquirer = require("inquirer");
@@ -27,7 +27,7 @@ function createTeam() {
                     "Manager",
                     "Engineer",
                     "Intern",
-                    "Stop"
+                    "Create Team!"
                 ]
             }
         ]).then(res => {
@@ -46,7 +46,8 @@ function createTeam() {
                     addIntern();
                     break;
 
-                case "Stop":
+                case "Create Team!":
+                    htmlRenderer(teamMembers);
                     break
 
             }
@@ -121,7 +122,7 @@ function createTeam() {
                     message: "What is your engineer's GitHub username?",
                     name: "gitHubUsername"
                 }
-            ]).then(userChoice => {
+            ]).then(res => {
                 console.log(res);
 
                 const engineer = new Engineer(res.engineerName, res.engineerID, res.engineerEmail, res.gitHubUsername)
@@ -167,4 +168,7 @@ function createTeam() {
         })
     }
 }
+
+module.exports = teamMembers
+
 createTeam();

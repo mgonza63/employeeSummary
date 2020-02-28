@@ -1,12 +1,4 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Manager</title>
 
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
-</head>
 <body>
     <div class="card" style="width: 18rem;">
       <h2 class="card-title">{{ name }}</h2>
@@ -15,8 +7,7 @@
   <div class="card-body">
       <ul class="list-group">
           <li class="list-group-item">ID: {{ id }}</li>
-          <li class="list-group-item">Email: <a href="mailto:{{ email }}">{{ email }}</a></li>
+          <li class="list-group-item">Email: {{ email }}</li>
           <li class="list-group-item">Office number: {{ officeNumber }}</li>
       </ul>
 </body>
-</html>
