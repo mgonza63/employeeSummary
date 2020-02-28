@@ -83,7 +83,7 @@ function createTeam() {
                 }
 
             ]).then(res => {
-                console.log(res);
+                
 
                 const manager = new Manager(res.managerName, res.managerID, res.managerEmail, res.managerOfficeNumber)
 
@@ -123,7 +123,7 @@ function createTeam() {
                     name: "gitHubUsername"
                 }
             ]).then(res => {
-                console.log(res);
+                
 
                 const engineer = new Engineer(res.engineerName, res.engineerID, res.engineerEmail, res.gitHubUsername)
 
@@ -158,7 +158,7 @@ function createTeam() {
                 }
              
         ]).then(res => {
-            console.log(res);
+            
 
             const intern = new Intern(res.internName, res.internID, res.internEmail, res.internSchool)
 

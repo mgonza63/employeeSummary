@@ -1,13 +1,14 @@
 
 <body>
     <div class="card" style="width: 18rem;">
-      <h2 class="card-title">{{ name }}</h2>
-      <h3 class="card-title"><i class="fas fa-mug-hot mr-2"></i>{{ role }}</h3>
-  </div>
+  
   <div class="card-body">
-      <ul class="list-group">
-          <li class="list-group-item">ID: {{ id }}</li>
-          <li class="list-group-item">Email: {{ email }}</li>
-          <li class="list-group-item">Office number: {{ officeNumber }}</li>
-      </ul>
+        <h5 class="card-title">{{ name }}</h5>
+        <h5 class="card-subtitle mb-2 text-muted">{{ role }}</h5>
+        <ul class="list-group">
+            <li class="list-group-item">ID: {{ id }}</li>
+            <li class="list-group-item">Email: {{ email }}</li>
+            <li class="list-group-item">Office number: {{ officeNumber }}</li>
+        </ul>
+    </div>
 </body>
